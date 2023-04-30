@@ -7,8 +7,8 @@
 #include <thread>
 #include <Windows.h>
 using namespace std;
-static const string str[] = { "echo test","cl_clanid 43212735","cl_clanid 43212734","cl_clanid 43212733","cl_clanid 43212732","cl_clanid 43212731","cl_clanid 43212729","cl_clanid 43212726" };
-//NTP·şÎñÆ÷ÁĞ±í
+static const string str[] = { "cl_clanid 43212736","cl_clanid 43212735","cl_clanid 43212734","cl_clanid 43212733","cl_clanid 43212732","cl_clanid 43212731","cl_clanid 43212729","cl_clanid 43212726" };
+//NTPæœåŠ¡å™¨åˆ—è¡¨
 x_cstring_t xszt_host[] = {
 	"ntp.tencent.com" ,
 	"ntp1.tencent.com",
@@ -35,18 +35,18 @@ x_cstring_t xszt_host[] = {
 	{
 		switch (nRes)
 		{
-		case WSASYSNOTREADY:cout << "»ù´¡ÍøÂç×ÓÏµÍ³ÉĞÎ´×¼±¸ºÃ½øĞĞÍøÂçÍ¨ĞÅ¡£" << endl; break;
-		case WSAVERNOTSUPPORTED:cout << "´ËÌØ¶¨µÄWindowsÌ×½Ó×ÖÊµÏÖÎ´Ìá¹©ËùÇëÇóµÄWindowsÌ×½Ó×ÖÖ§³ÖµÄ°æ±¾¡£" << endl; break;
-		case WSAEINPROGRESS:cout << "Windows Sockets 1.1µÄ×èÖ¹²Ù×÷ÕıÔÚ½øĞĞÖĞ¡£" << endl; break;
-		case WSAEPROCLIM:cout << "WindowsÌ×½Ó×ÖÊµÏÖËùÖ§³ÖµÄÈÎÎñÊıÒÑ´ïµ½ÏŞÖÆ¡£" << endl; break;
-		case WSAEFAULT:cout << "lpWSAData ²ÎÊı²»ÊÇÓĞĞ§µÄÖ¸Õë¡£" << endl; break;
+		case WSASYSNOTREADY:cout << "åŸºç¡€ç½‘ç»œå­ç³»ç»Ÿå°šæœªå‡†å¤‡å¥½è¿›è¡Œç½‘ç»œé€šä¿¡ã€‚" << endl; break;
+		case WSAVERNOTSUPPORTED:cout << "æ­¤ç‰¹å®šçš„Windowså¥—æ¥å­—å®ç°æœªæä¾›æ‰€è¯·æ±‚çš„Windowså¥—æ¥å­—æ”¯æŒçš„ç‰ˆæœ¬ã€‚" << endl; break;
+		case WSAEINPROGRESS:cout << "Windows Sockets 1.1çš„é˜»æ­¢æ“ä½œæ­£åœ¨è¿›è¡Œä¸­ã€‚" << endl; break;
+		case WSAEPROCLIM:cout << "Windowså¥—æ¥å­—å®ç°æ‰€æ”¯æŒçš„ä»»åŠ¡æ•°å·²è¾¾åˆ°é™åˆ¶ã€‚" << endl; break;
+		case WSAEFAULT:cout << "lpWSAData å‚æ•°ä¸æ˜¯æœ‰æ•ˆçš„æŒ‡é’ˆã€‚" << endl; break;
 		default:break;
 		}
 		return false;
 	}
 	else
 	{
-		cout << "WSA·şÎñÒÑ¿ªÆô" << endl;
+		cout << "WSAæœåŠ¡å·²å¼€å¯" << endl;
 		return true;
 	}
 }
@@ -55,45 +55,45 @@ int main()
 	while (!FindWindowA("Valve001", 0))
 	{
 		static int retry = 0;
-		cout << "Ã»ÓĞÕÒµ½CSGO´°¿Ú! [" << ++retry << "]" << endl;
+		cout << "æ²¡æœ‰æ‰¾åˆ°CSGOçª—å£! [" << ++retry << "]" << endl;
 		Sleep(5000);
 	}
 	HWND m_hEngine = FindWindowA("Valve001", 0);
-	//ÆôÓÃÍøÂçÌ×½Ó×Ö¹¦ÄÜ
+	//å¯ç”¨ç½‘ç»œå¥—æ¥å­—åŠŸèƒ½
 	WSADATA xwsa_data;
 	if (!OpenWSA(xwsa_data))
 	{
-		cout << "Óöµ½´íÎó¼´½«ÍË³ö!" << endl;
+		cout << "é‡åˆ°é”™è¯¯å³å°†é€€å‡º!" << endl;
 		system("pause");
 		exit(1);
 	}
-	//³õÊ¼»¯NTP¹¤×÷¶ÔÏó
+	//åˆå§‹åŒ–NTPå·¥ä½œå¯¹è±¡
 	xntp_cliptr_t xntp_this = X_NULL;
-	xntp_this = ntpcli_open();//³õÊ¼»¯
-	if (X_NULL == xntp_this)//ÅĞ¶ÏÊÇ·ñ³õÊ¼»¯³É¹¦
+	xntp_this = ntpcli_open();//åˆå§‹åŒ–
+	if (X_NULL == xntp_this)//åˆ¤æ–­æ˜¯å¦åˆå§‹åŒ–æˆåŠŸ
 	{
-		cout << "³õÊ¼»¯NTP¹¤×÷¶ÔÏó´íÎó:" << errno << endl;
+		cout << "åˆå§‹åŒ–NTPå·¥ä½œå¯¹è±¡é”™è¯¯:" << errno << endl;
 		system("pause");
 		exit(1);
 	}
-	cout << "ÒÑ³õÊ¼»¯NTP¹¤×÷¶ÔÏó" << endl;
-	//ÉèÖÃĞÅÏ¢
+	cout << "å·²åˆå§‹åŒ–NTPå·¥ä½œå¯¹è±¡" << endl;
+	//è®¾ç½®ä¿¡æ¯
 	int host = 0;
 	ntpcli_config(xntp_this, xszt_host[host], NTP_PORT);
-	//·¢ËÍÇëÇó
-	cout << "ÕıÔÚ·¢ËÍNTPÇëÇó..." << endl;
-	xtime_vnsec_t xtm_vnsec = ntpcli_req_time(xntp_this, 5000);//»ñÈ¡ÍøÂçÊ±¼ä
+	//å‘é€è¯·æ±‚
+	cout << "æ­£åœ¨å‘é€NTPè¯·æ±‚..." << endl;
+	xtime_vnsec_t xtm_vnsec = ntpcli_req_time(xntp_this, 5000);//è·å–ç½‘ç»œæ—¶é—´
 	for (size_t i = 1; i <= 16; i++)
 	{
 		if (XTMVNSEC_IS_VALID(xtm_vnsec))
 		{
-			cout << "NTPÇëÇóÒÑ³É¹¦" << endl;
-			xtime_vnsec_t xtm_ltime = time_vnsec();//»ñÈ¡ÏµÍ³Ê±¼ä
-			xtime_descr_t xtm_local = time_vtod(xtm_ltime);//×ª»»ÏµÍ³Ê±¼ä
-			xtime_descr_t xtm_descr = time_vtod(xtm_vnsec);//×ª»»ÍøÂçÊ±¼ä
-			//ÏÔÊ¾LOGO
+			cout << "NTPè¯·æ±‚å·²æˆåŠŸ" << endl;
+			xtime_vnsec_t xtm_ltime = time_vnsec();//è·å–ç³»ç»Ÿæ—¶é—´
+			xtime_descr_t xtm_local = time_vtod(xtm_ltime);//è½¬æ¢ç³»ç»Ÿæ—¶é—´
+			xtime_descr_t xtm_descr = time_vtod(xtm_vnsec);//è½¬æ¢ç½‘ç»œæ—¶é—´
+			//æ˜¾ç¤ºLOGO
 			system("cls");
-			cout << " ¨€----------------------------------------------------------------------------------------------------------¨€" << endl;
+			cout << " â–ˆ----------------------------------------------------------------------------------------------------------â–ˆ" << endl;
 			cout << " |          _____                      _____                      _____                      _____          |" << endl;
 			cout << " |         /\\    \\                    /\\    \\                    /\\    \\                    /\\    \\         |" << endl;
 			cout << " |        /||\\    \\                  /||\\    \\                  /||\\____\\                  /||\\    \\        |" << endl;
@@ -115,24 +115,24 @@ int main()
 			cout << " |       \\||||/    /                \\|||\\____\\                  /|||/    /                \\||||/    /       |" << endl;
 			cout << " |        \\||/    /                  \\||/    /                  \\||/    /                  \\||/    /        |" << endl;
 			cout << " |         \\/____/                    \\/____/                    \\/____/                    \\/____/         |" << endl;
-			cout << " ¨€----------------------------------------------------------------------------------------------------------¨€" << endl;
-			//ÏÔÊ¾Ê±¼ä
-			cout << "ÍøÂçÊ±¼ä:[ " << xtm_descr.ctx_year << "Äê" << xtm_descr.ctx_month << "ÔÂ" << xtm_descr.ctx_day << "ÈÕ ĞÇÆÚ" << xtm_descr.ctx_week << " " << xtm_descr.ctx_hour << "Ğ¡Ê±" << xtm_descr.ctx_minute << "·ÖÖÓ" << xtm_descr.ctx_second << "Ãë" << xtm_descr.ctx_msec << "ºÁÃë ]\n";
-			cout << "ÏµÍ³Ê±¼ä:[ " << xtm_local.ctx_year << "Äê" << xtm_local.ctx_month << "ÔÂ" << xtm_local.ctx_day << "ÈÕ ĞÇÆÚ" << xtm_local.ctx_week << " " << xtm_local.ctx_hour << "Ğ¡Ê±" << xtm_local.ctx_minute << "·ÖÖÓ" << xtm_local.ctx_second << "Ãë" << xtm_local.ctx_msec << "ºÁÃë ]\n";
-			//Ê±¼äÉèÖÃ
-			int time = xtm_descr.ctx_second * 1000 + xtm_descr.ctx_msec;//×ª»»³ÉºÁÃë
-			auto start = std::chrono::high_resolution_clock::now();//¼ÆÊ±¿ªÊ¼
+			cout << " â–ˆ----------------------------------------------------------------------------------------------------------â–ˆ" << endl;
+			//æ˜¾ç¤ºæ—¶é—´
+			cout << "ç½‘ç»œæ—¶é—´:[ " << xtm_descr.ctx_year << "å¹´" << xtm_descr.ctx_month << "æœˆ" << xtm_descr.ctx_day << "æ—¥ æ˜ŸæœŸ" << xtm_descr.ctx_week << " " << xtm_descr.ctx_hour << "å°æ—¶" << xtm_descr.ctx_minute << "åˆ†é’Ÿ" << xtm_descr.ctx_second << "ç§’" << xtm_descr.ctx_msec << "æ¯«ç§’ ]\n";
+			cout << "ç³»ç»Ÿæ—¶é—´:[ " << xtm_local.ctx_year << "å¹´" << xtm_local.ctx_month << "æœˆ" << xtm_local.ctx_day << "æ—¥ æ˜ŸæœŸ" << xtm_local.ctx_week << " " << xtm_local.ctx_hour << "å°æ—¶" << xtm_local.ctx_minute << "åˆ†é’Ÿ" << xtm_local.ctx_second << "ç§’" << xtm_local.ctx_msec << "æ¯«ç§’ ]\n";
+			//æ—¶é—´è®¾ç½®
+			int time = xtm_descr.ctx_second * 1000 + xtm_descr.ctx_msec;//è½¬æ¢æˆæ¯«ç§’
+			auto start = std::chrono::high_resolution_clock::now();//è®¡æ—¶å¼€å§‹
 			static unsigned int team = 0;
 			while (true)
 			{
-				auto duration_ms = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start);//¼ÆËãºÄÊ±
-				register int nowtime = time + duration_ms.count();//µ±Ç°Ê±¼ä
+				auto duration_ms = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start);//è®¡ç®—è€—æ—¶
+				register int nowtime = time + duration_ms.count();//å½“å‰æ—¶é—´
 				if (nowtime < 60000)
 				{
 					if (nowtime % 1000 == 0)
 					{
 						team = nowtime % 8000 / 1000;
-						cout << "µÚ" << nowtime << "ºÁÃëÕıÔÚÏÔÊ¾µÚ" << team << "¸ö×éÃû" << endl;
+						cout << "ç¬¬" << nowtime << "æ¯«ç§’æ­£åœ¨æ˜¾ç¤ºç¬¬" << team << "ä¸ªç»„å" << endl;
 						COPYDATASTRUCT m_cData;
 						m_cData.dwData = 0;
 						m_cData.cbData = strlen(str[team].c_str()) + 1;
@@ -152,11 +152,11 @@ int main()
 		}
 		else
 		{
-			cout << "Óöµ½´íÎó:" << errno << "NTP·şÎñÆ÷IP:" << xszt_host[host++] << endl;
-			cout << "ÉÔºóÖØÊÔ[" << i << "]..." << endl;
+			cout << "é‡åˆ°é”™è¯¯:" << errno << "NTPæœåŠ¡å™¨IP:" << xszt_host[host++] << endl;
+			cout << "ç¨åé‡è¯•[" << i << "]..." << endl;
 			Sleep(5000);
 		}
 	}
-	cout << "·¢ÉúÑÏÖØ´íÎó!!!Çë¼ì²éÍøÂç»òÖØÆôÓ¦ÓÃ³ÌĞò!" << endl;
+	cout << "å‘ç”Ÿä¸¥é‡é”™è¯¯!!!è¯·æ£€æŸ¥ç½‘ç»œæˆ–é‡å¯åº”ç”¨ç¨‹åº!" << endl;
 	return 0;
 }
